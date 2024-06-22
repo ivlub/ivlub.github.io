@@ -335,3 +335,8 @@ body {
       text-decoration: none;
       color: #9f2e32;
     }
+
+    .grid-container a {
+      text-decoration: none;
+      color: white;
+    }
