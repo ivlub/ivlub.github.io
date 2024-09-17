@@ -1,177 +1,23 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ivan Lubyako</title>
-    <link rel="stylesheet" href="style.css">
-   
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
-<script src="animation.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<link rel="shortcut icon" href="img/logo_roboto.ico" type="image/x-icon">
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Tinos:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="header">
-        <a href="index.html" class="logo"><img src="img/logo_roboto.png"></a>
-        <div class="header-right roboto-light" style="letter-spacing: 2px;">
-          <a class="odkaz" href="index.html">Home</a>
-          <a class ="odkaz" href="#portfolio">Portfolio</a>
-          <a class="odkaz" href="#about">About</a>
+    <div class="card">
+        <div class="card-content">
+            <h1>Ivan Lubyako</h1>
+            <h2>Software Developer</h2>
+            <p>Email: ivan@lubyako.com</p>
+            <p>Technical University of Munich</p>
+            <div class="social-icons">
+                <a href="https://github.com/ivlub" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/ivan-lubyako-aa627529a/" target="_blank">LinkedIn</a>
+            </div>
         </div>
-      </div>
-      <div class="canvas_container">
-<canvas id="bg-animation"></canvas>
-<div class="overlay">
-    <div class="introduction_div">
-        <img class="title_image" src="img/me_no_bg_color.png">
-    <div class="textrs">
-    <h1 class="roboto-light changing" style="font-size: 1.8em; letter-spacing: .2rem;">I'm Ivan Lubyako.</h1>
-    <h1 class="roboto-light changing" style="font-size: 1.8em; letter-spacing: .2rem;">I CREATE</h1><h1 class="roboto-light changing"><span id="dynamic-word">FRONT-END.</span></h1>
     </div>
-   
-    </div>
-    <script>
-        const words = ["FRONT-END.", "WEBSITES.", "E-STORES.", "SOFTWARE.", "SEO.", "WEB-APPS."];
-currentWordIndex = 0;
-document.addEventListener('DOMContentLoaded', (event) => {
-    const words = ["FRONT-END.", "WEBSITES.", "E-STORES.", "SOFTWARE.", "SEO.", "WEB-APPS."];
-    let currentWordIndex = 0;
-    const dynamicWord = document.getElementById("dynamic-word");
-
-    function updateWord() {
-        dynamicWord.classList.remove("fade-in");
-        dynamicWord.classList.add("fade-out");
-
-        setTimeout(() => {
-            currentWordIndex = (currentWordIndex + 1) % words.length;
-            dynamicWord.textContent = words[currentWordIndex];
-            dynamicWord.classList.remove("fade-out");
-            dynamicWord.classList.add("fade-in");
-        }, 500); // Match the timeout to the CSS transition time
-    }
-
-    setInterval(updateWord, 2500);
-});
-
-    </script>
-     <span  id="portfolio"></span>
-<h1 class="roboto-light" style="text-align: center; text-transform: uppercase; letter-spacing: 0.2em;" >Portfolio</h1>
-<p class="roboto-light-italic" style="text-align: center">Please note that due to the nature of some of my projects, I am not allowed to display them fully in order to comply with the client's security standard.</p>
-<div class="grid-container roboto-light">
-
-  <a href="https://www.jobs.irs.gov">
-    <div class="grid-item">
-        <img src="img/irs.png" alt="IRS">
-        <h3>IRS Careers Website</h3>
-    </div>
-  </a>
-
-  <a href="https://cloudconnect.cz">
-    <div class="grid-item">
-      <img src="img/cloudconnect.png" alt="Cloudconnect">
-      <h3>CloudConnect</h3>
-    </div>
-  </a>
-
-  <a href="https://ollsoft.ai">
-    <div class="grid-item">
-      <img src="img/ollsoft.png" alt="Ollsoft">
-      <h3>Ollsoft.ai</h3>
-    </div>
-    </a>
-
-  <a href="https://www.lahudky-vlckova.cz">
-    <div class="grid-item">
-      <img src="img/lahudky.png" alt="Lahudky Vlckova">
-      <h3>Lahůdky Vlčková</h3>
-    </div>
-  </a>
-
-  <a href="https://www.new-web.netcore.services">
-    <div class="grid-item">
-      <img src="img/netcore.png" alt="Netcore">
-      <h3>Netcore</h3>
-    </div>
-  </a>
-
-  <a href="https://www.newtel.cz">
-    <div class="grid-item">
-        <img src="img/telekom.png" alt="Project 3">
-        <h3>NewTel</h3>
-      </div>
-      </a>
-
-    <a href="https://www.byteship.ollsoft.ai">
-      <div class="grid-item">
-        <img src="img/byteship.png" alt="Project 4">
-        <h3>ByteShip</h3>
-      </div>
-      </a>
-
-      <a href="https://www.lovespellbridal.cz">
-      <div class="grid-item">
-        <img src="img/svatebni.png" alt="Project 5">
-        <h3>Love Spell Bridal</h3>
-      </div>
-      </a>
-
-    <div class="grid-item">
-      <img src="img/devices.png" alt="Project 6">
-      <h3>Signal tower control panel</h3>
-    </div>
-
-    <div class="grid-item">
-      <img src="img/byteshipnew.png" alt="Project 6">
-      <h3>ByteShip redesign</h3>
-    </div>
-
-    <div class="grid-item">
-      <img src="img/dashboard.png" alt="Project 6">
-      <h3>Dashboard</h3>
-    </div>
-
-  </div>
-  <span id="about"></span>
-  <div class="the-process">
-    <h1 class="roboto-light" style="text-align: center; text-transform: uppercase; letter-spacing: 0.2em;" >THE PROCESS</h1>
-<p class="roboto-light" style="text-align: center">I handle every job individually. My main focus is on active communication with the client - only that way we can achieve exactly what the client wants.</p>
-  </div>
-  <div id="three-step-plan" class="roboto-light">
-    <div class="step">
-      <div class="step-number">1</div>
-      <h2 class="step-title">Planning</h2>
-      <p class="step-text">We will discuss what do you need. You can be very concrete, or not concrete at all: I can precisely follow what you said, or give you a few proposals of what we could do. You can even draw your ideas on paper and send them to me. I will set up everything needed for the project. Do you also need any graphic design work? Photo editing? Videography? No problem - I can also handle that for you.</p>
-    </div>
-    <div class="step">
-      <div class="step-number">2</div>
-      <h2 class="step-title">Deep work</h2>
-      <p class="step-text">I then start designing, creating and hosting the project. All throughout this phase, I will actively communicate with you, show you progress and tweak things to your liking. Whether it is a webpage, personal portfolio, e-commerce store, web app, automation software or anything else, the solution will be custom-made for your needs. </p>
-    </div>
-    <div class="step">
-      <div class="step-number">3</div>
-      <h2 class="step-title">Finish line</h2>
-      <p class="step-text">At this time, we will have a nearly finished product. Here, we will handle the final adjustments: "Could we actually do the title a bit larger?" "Can we add this section?" After your review and polishing the final little things I will publish the project. This is the finish line. </p>
-    </div>
-    <p class="roboto-light" style="text-align: center"><b>Contact me at: </b><a class="cop" href="mailto:ivan@lubyako.com">ivan@lubyako.com</a>
-  </div>
-  <br style="margin-top: 50px">
-  <footer>
-    <div class="footer">
-        <div class="social-media">
-            <a href="https://linkedin.com/in/ivan-lubyako-aa627529a" target="_blank"><i class="fa-brands fa-linkedin"></i></i></a>
-            <a href="https://www.instagram.com/ivanlubyako/" target="_blank"><i class="fab fa-instagram"></i></a>
-        </div>
-        <div>&copy;<span> 2024 <i>Designed by <a class="cop" href="https://ivan.lubyako.com">Ivan Lubyako</a></i></span></div>
-    </div>
-</footer>
-
-</div>
-</div>
 </body>
 </html>
