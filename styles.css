@@ -1,45 +1,101 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f9;
+    color: #e9edf3;
+    background: radial-gradient(1200px 800px at 20% 10%, rgba(184, 74, 74, 0.10), transparent 60%),
+                radial-gradient(800px 600px at 80% 80%, rgba(117, 49, 49, 0.08), transparent 60%),
+                linear-gradient(180deg, #0d0a0b 0%, #141013 100%);
+}
+
+#gol-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    position: relative;
+    z-index: 1;
+    background: rgba(16, 18, 24, 0.55);
+    border: 1px solid rgba(233, 237, 243, 0.10);
+    border-radius: 16px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 24px;
     text-align: center;
-    width: 300px;
+    width: 360px;
 }
 
 h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
+    font-size: 28px;
+    margin-bottom: 8px;
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+    color: #f7f8fa;
 }
 
 h2 {
-    font-size: 18px;
-    color: #888;
-    margin-bottom: 20px;
+    font-size: 16px;
+    margin-bottom: 18px;
+    background: linear-gradient(90deg, #c65858, #e3a8a0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 p {
     margin: 10px 0;
-    color: #333;
+    color: #cfd7df;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 10px;
 }
 
 .social-icons a {
-    margin: 0 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(233, 237, 243, 0.14);
+    background: rgba(255, 255, 255, 0.035);
+    color: #eef2f6;
     text-decoration: none;
-    color: #3498db;
+    font-weight: 500;
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .social-icons a:hover {
-    text-decoration: underline;
+    transform: translateY(-1px);
+    background: rgba(198, 88, 88, 0.12);
+    border-color: rgba(198, 88, 88, 0.35);
+    box-shadow: 0 6px 18px rgba(198, 88, 88, 0.18);
+}
+
+@media (max-width: 420px) {
+    .card {
+        width: calc(100% - 40px);
+        padding: 22px;
+    }
+    h1 { font-size: 24px; }
+    h2 { font-size: 14px; margin-bottom: 16px; }
+    .social-icons { gap: 12px; }
+    .social-icons a { padding: 11px 14px; }
 }
