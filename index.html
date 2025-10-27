@@ -4,20 +4,129 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ivan Lubyako</title>
+    <meta name="theme-color" content="#0a111f">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <canvas id="gol-canvas" aria-hidden="true"></canvas>
     <div class="card">
         <div class="card-content">
             <h1>Ivan Lubyako</h1>
             <h2>Software Developer</h2>
-            <p>Email: ivan@lubyako.com</p>
+            <p>Email: ivan (at) lubyako.com</p>
             <p>Technical University of Munich</p>
             <div class="social-icons">
-                <a href="https://github.com/ivlub" target="_blank">GitHub</a>
-                <a href="https://www.linkedin.com/in/ivan-lubyako-aa627529a/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/ivlub" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">GitHub</a>
+                <a href="https://www.linkedin.com/in/ivan-lubyako-aa627529a/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">LinkedIn</a>
             </div>
         </div>
     </div>
+    <script>
+    (function () {
+        var canvas = document.getElementById('gol-canvas');
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d', { alpha: true });
+        ctx.imageSmoothingEnabled = false;
+        var dpr = window.devicePixelRatio || 1;
+        var cellSize, cols, rows, grid, next;
+
+        function resize() {
+            var w = window.innerWidth;
+            var h = window.innerHeight;
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            canvas.width = Math.floor(w * dpr);
+            canvas.height = Math.floor(h * dpr);
+            cellSize = Math.max(Math.floor(10 * dpr), Math.floor(Math.min(canvas.width, canvas.height) / 80));
+            cols = Math.max(10, Math.floor(canvas.width / cellSize));
+            rows = Math.max(10, Math.floor(canvas.height / cellSize));
+            grid = new Uint8Array(cols * rows);
+            next = new Uint8Array(cols * rows);
+            seed();
+        }
+
+        function idx(x, y) { return y * cols + x; }
+
+        function seed() {
+            for (var i = 0; i < grid.length; i++) {
+                grid[i] = Math.random() < 0.12 ? 1 : 0;
+            }
+        }
+
+        function step() {
+            for (var y = 0; y < rows; y++) {
+                for (var x = 0; x < cols; x++) {
+                    var alive = grid[idx(x, y)];
+                    var n = 0;
+                    // wrap-around neighbors
+                    for (var dy = -1; dy <= 1; dy++) {
+                        for (var dx = -1; dx <= 1; dx++) {
+                            if (dx === 0 && dy === 0) continue;
+                            var nx = (x + dx + cols) % cols;
+                            var ny = (y + dy + rows) % rows;
+                            n += grid[idx(nx, ny)];
+                        }
+                    }
+                    var v = alive;
+                    if (alive) {
+                        v = (n === 2 || n === 3) ? 1 : 0;
+                    } else {
+                        v = (n === 3) ? 1 : 0;
+                    }
+                    next[idx(x, y)] = v;
+                }
+            }
+            // swap
+            var tmp = grid; grid = next; next = tmp;
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.globalCompositeOperation = 'lighter';
+            for (var y = 0; y < rows; y++) {
+                for (var x = 0; x < cols; x++) {
+                    if (!grid[idx(x, y)]) continue;
+                    var px = Math.floor(x * cellSize);
+                    var py = Math.floor(y * cellSize);
+                    var t = ((x + y) % 100) / 100; // 0..1
+                    var hue = 350 + t * 20; // deep red to soft crimson
+                    ctx.fillStyle = 'hsla(' + hue + ', 65%, 58%, 0.20)';
+                    var cw = Math.max(1, Math.floor(cellSize - 1 * dpr));
+                    var ch = Math.max(1, Math.floor(cellSize - 1 * dpr));
+                    ctx.fillRect(px, py, cw, ch);
+                }
+            }
+            ctx.restore();
+        }
+
+        function sprinkle() {
+            for (var i = 0; i < grid.length; i++) {
+                if (Math.random() < 0.003) grid[i] = 1;
+            }
+        }
+
+        function init() {
+            resize();
+            window.addEventListener('resize', resize);
+            var last = 0, acc = 0;
+            var interval = 1000 / 14; // ~14 FPS sim
+            function raf(ts) {
+                if (!last) last = ts;
+                var delta = ts - last; last = ts; acc += delta;
+                while (acc > interval) { step(); acc -= interval; }
+                draw();
+                requestAnimationFrame(raf);
+            }
+            setInterval(sprinkle, 1800);
+            requestAnimationFrame(raf);
+        }
+
+        init();
+    })();
+    </script>
 </body>
 </html>
